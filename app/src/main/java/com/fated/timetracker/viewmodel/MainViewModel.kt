@@ -2,7 +2,7 @@ package com.fated.timetracker.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fated.timetracker.model.Activity
+import com.fated.timetracker.model.activity.Activity
 import com.fated.timetracker.repository.ActivityRepository
 import kotlinx.coroutines.launch
 

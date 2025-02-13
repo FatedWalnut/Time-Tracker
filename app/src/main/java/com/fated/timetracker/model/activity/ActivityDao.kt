@@ -1,4 +1,4 @@
-package com.fated.timetracker.model
+package com.fated.timetracker.model.activity
 
 
 import androidx.lifecycle.LiveData

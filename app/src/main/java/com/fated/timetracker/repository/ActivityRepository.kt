@@ -1,8 +1,8 @@
 package com.fated.timetracker.repository
 
 import androidx.lifecycle.LiveData
-import com.fated.timetracker.model.Activity
-import com.fated.timetracker.model.ActivityDao
+import com.fated.timetracker.model.activity.Activity
+import com.fated.timetracker.model.activity.ActivityDao
 
 class ActivityRepository(private val activityDao: ActivityDao) {
     val allActivities: LiveData<List<Activity>> = activityDao.getAllActivities()
