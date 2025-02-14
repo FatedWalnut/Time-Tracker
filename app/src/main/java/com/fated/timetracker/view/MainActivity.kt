@@ -3,44 +3,89 @@ package com.fated.timetracker.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.fated.timetracker.ui.theme.TimeTrackerTheme
-import com.fated.timetracker.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
-    private val mainViewModel: MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TimeTrackerTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                MainScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MainScreen() {
+    Scaffold(
+        topBar = { TopBar() },
+        floatingActionButton = { AddButton() }
+    ) { padding ->
+        Column(modifier = Modifier.padding(padding)) {
+            EstatisticasSection()
+            ListaDeAtividades()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBar() {
+    TopAppBar(
+        title = { Text("Time Tracker") }
+    )
+}
+
+@Composable
+fun EstatisticasSection() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Estatísticas", style = MaterialTheme.typography.titleLarge)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "Total de Horas Rastreadas: -- h")
+        }
+    }
+}
+
+@Composable
+fun ListaDeAtividades() {
+    LazyColumn(modifier = Modifier.padding(16.dp)) {
+        // Nenhuma atividade ainda
+    }
+}
+
+@Composable
+fun AddButton() {
+    FloatingActionButton(
+        onClick = { /* Ação de adicionar atividade */ }
+    ) {
+        Icon(imageVector = Icons.Default.Add, contentDescription = "Adicionar Atividade")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun PreviewMainScreen() {
     TimeTrackerTheme {
-        Greeting("Android")
+        MainScreen()
     }
 }
